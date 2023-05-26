@@ -31,11 +31,11 @@ jobs:
       shell: bash
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew test
       shell: bash
       
-    - name: Report to CodeCov
-      uses: codecov/codecov-action@v2
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: ${{ always() }}
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
         file: ./build/reports/jacoco/test/jacocoTestReport.xml
